@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="heading">Xin chào các bạn!</h1>
+    <div class="content">
+        <p class="para">para 1</p>
+        <p class="para">para 2</p>
+        <p>para 3</p>
+        <p>para 4</p>
+    </div>
+
+
+    <h2 id="text">Xin chào các bạn</h2>
+
+    <div class="box">
+        <p>Box item</p>
+    </div>
+
+    <script>
+        // trả về 1 đối tượng duy nhất vì là id
+        let h1 = document.getElementById("heading");
+        console.log(h1);
+        // trả về 1 danh sách các  phấn tử tương tự như mảng
+        let paras = document.getElementsByClassName("para")
+        console.log(paras)//  có thể truy cập thông qua chỉ số vd: paras[0],paras[1],...
+
+        //cung trả về 1 ds các phấn tử
+        let paras1 = document.getElementsByTagName("p")
+        console.log(paras1)// cũng có thể truy cập từng phần tử theo chỉ số
+
+        let h1Selector = document.querySelector("#heading");
+        console.log(h1Selector);
+        // querySelector chỉ cho ta phần tử đầu tiên 
+        let paraSelector = document.querySelector(".para");
+        console.log(paraSelector);
+        // trả về tất cả phần tử có class .para
+        let paraSelectorAll = document.querySelectorAll(".para");
+        console.log(paraSelectorAll);
+
+        // lấy para3
+        let para3 = document.querySelector(".content p:nth-child(3)")
+        console.log(para3)
+
+        //////////////////////////////////////////
+        // truy cập nội dụng của 1 phần tử 
+        // + innerHTML
+        // + innerText
+        // + textContent
+
+        let content = document.querySelector(".content")//truy cập vào div
+        console.log(content.innerHTML)// trả về bao gồm cả loại thẻ và nội dung của thẻ
+        console.log(content.innerText)// không lấy được nội dung của thẻ khi đặt thuộc tính display : none
+        console.log(content.textContent)
+        //lấy được nội dung của thẻ ẩn, tức khi đặt thuộc tính display :none vào thẻ thì textContent vẫn sẽ hiển thị được nội dung của thẻ
+
+
+
+        //////////////////////////////////////
+        // chỉnh sử nội dung của phần tử DOM
+        let content2 = document.querySelector(".content")//truy cập vào div
+        // content2.innerHTML = " <input placeholder='name'>"//có thể chèn mã html
+
+        let h1l2 = document.getElementById("heading");
+        h1l2.innerText = "Hahah"// ko thể chèn mã html
+        h1l2.textContent = "Huhuhu"// ko thể chèn mã html
+
+        ///////////////////////////////////////
+        // thay dổi style css của 1 phần tử 
+        // cú pháp : emlemt.style.property = value
+        let pi = document.querySelector(".content p:nth-child(1)");
+        pi.style.color = "red"
+        pi.style.backgroundColor = "black"
+
+        let pi2 = document.querySelectorAll("p")
+        console.log(pi2)
+        // khi muốn thay đổi style cho 1 list các phần tử ta phải duyệt qua vòng lặp
+        for (let i = 0; i < pi2.length; i++) {
+            pi2[i].style.color = "pink"
+        }
+
+        // c2 dùng map
+        Array.from(pi2).map(ele => ele.style.color = "blue")
+        // khi dùng map ta phải convert sang mảng ta dùng 1 phương thức Array.from(...)
+
+
+
+        /////////////////////////////////////
+        // chèn phần tử 
+        const para2 = document.createElement('p');
+        para2.innerText = "New para 2";
+
+        document.body.appendChild(para2);//appendChild() : Thêm phần tử vào cuối của phần tử cha
+
+
+        const para = document.createElement('p');
+        para.innerText = "New para 1";
+
+        document.body.prepend(para);//prepend() : Thêm phần tử vào đầu của phần tử cha
+
+
+        // Tạo ta thẻ h2 và gán nội dung cho thẻ
+        const heading = document.createElement('h2');
+        heading.innerText = "Các bạn có khỏe không?";
+
+        const box = document.querySelector('.box');
+        document.body.insertBefore(heading, box); // Chèn thẻ mới vào trước class "box" nằm trong body
+        //  insertBefore() : Thêm phần tử vào trong phần tử cha và trước phần tử được chỉ được
+    </script>
+
+</body>
+
+</html>
