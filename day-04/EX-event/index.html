@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        #btn-scroll {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body style="height: 2000px;">
+    <p style="height: 500px;font-size: 30px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea quod tempore
+        ut molestias odio assumenda quasi
+        sapiente natus adipisci, maiores, suscipit quisquam sint dolorum. Dignissimos repellendus laudantium quisquam
+        cupiditate. Aliquam.</p>
+
+    <button id="btn-1" onclick="sayHello2()">Change content</button>
+    <button id="btn-2">Change color</button>
+    <button id="btn-3">Change background</button>
+
+    <!-- Sử dụng HTML-attribute -->
+    <button class="button" onclick="sayHello()">Click me</button>
+
+    <hr>
+    <input type="text" placeholder="input name..." id="input-name" autocomplete="on">
+    <button id="btn-show">Show all</button>
+
+
+    <ul id="list">
+
+    </ul>
+
+    <!--  -->
+    <button id="btn-scroll">top</button>
+
+
+    <script>
+
+        // scoll
+        const btntop = document.getElementById("btn-scroll")
+        window.addEventListener("scroll", () => {
+            if (document.documentElement.scrollTop > 300) {
+                btntop.classList.remove("hide")
+            } else {
+                btntop.classList.add("hide")
+            }
+        })
+
+        btntop.addEventListener("click",()=>{
+            window.scrollTo({
+                top:0,
+                behavior :"smooth"
+            })
+        })
+        // tim kiếm user
+
+        const inputEl = document.querySelector("#input-name")
+        const btnshowEl = document.querySelector("#btn-show")
+        const listEl = document.querySelector("#list")
+        console.log(inputEl)
+        console.log(btnshowEl)
+        console.log(listEl)
+        const users = [
+            { id: 1, name: "Nguyễn Văn A" },
+            { id: 2, name: "Trần Văn B" },
+            { id: 3, name: "Lê Văn D" },
+            { id: 4, name: "Bùi Văn E" },
+            { id: 5, name: "Hoàng Văn F" },
+            { id: 6, name: "THị Văn C" },
+            { id: 7, name: "Nguyễn Văn G" }
+        ];
+
+        const renderUser = (users) => {
+            let html = "";
+            users.forEach(user => {
+                html += `<li>${user.id} - ${user.name}</li>`
+            });
+
+            listEl.innerHTML = html;
+        }
+
+
+        inputEl.addEventListener("keydown", (e) => {
+            if (e.key == "Enter") {
+                const keyword = e.target.value;
+                const result = users.filter(user => user.name.toLowerCase().includes(keyword.toLowerCase()));
+                renderUser(result)
+            }
+
+
+        })
+        renderUser(users)
+        btnshowEl.addEventListener("click", () => {
+            renderUser(users)
+        })
+
+        // ////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+        function sayHello2() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            alert(quotes[randomIndex]);
+        }
+
+
+        const quotes = [
+            "The only way to do great work is to love what you do. – Steve Jobs",
+            "Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill",
+            "Believe you can and you're halfway there. – Theodore Roosevelt",
+            "It does not matter how slowly you go as long as you do not stop. – Confucius",
+            "You only live once, but if you do it right, once is enough. – Mae West"
+        ];
+        // Tạo hàm để tạo màu HEX ngẫu nhiên
+        // function randomColor() {
+        //     return "#" + Math.floor(Math.random() * 16777215).toString(16);
+        // }
+
+        let btn2 = document.querySelector("#btn-2")
+        console.log(btn2)
+
+        btn2.onclick = function () {
+            // Tạo màu HEX ngẫu nhiên
+            const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            // Thay đổi màu chữ của thẻ p
+            para.style.color = randomColor;
+            console.log("thay dổi màu!");
+        };
+
+
+        let btn3 = document.querySelector("#btn-3")
+        // Tạo hàm để tạo màu RGB ngẫu nhiên
+        function randomRGB() {
+            return "rgb(" + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
+        }
+
+        // Thêm sự kiện click vào button
+        btn3.addEventListener("click", function () {
+            // Thay đổi màu nền của thẻ p bằng màu RGB ngẫu nhiên
+            para.style.backgroundColor = randomRGB();
+        });
+
+        /////////////////////////////////////////////////////////////
+        function sayHello() {
+            console.log('Xin chào các bạn');
+        }
+
+        let btn = document.querySelector('.button');
+        let para = document.querySelector('p');
+
+        // Sử dụng DOM property
+        btn.onclick = function () {
+            console.log('Xin chào các bạn 1');
+        }
+
+        // Sử dụng addEventListener
+        btn.addEventListener('click', function () {
+            para.classList.toggle('red');
+        })
+
+
+        // click: Sự kiện xảy ra khi người dùng click vào một phần tử
+
+        // mousedown: Sự kiện xảy ra khi người dùng nhấp chuột
+
+        // mousemove: Sự kiện xảy ra khi người dùng di chuyển chuột
+
+        // mouseup: Sự kiện xảy ra khi người dùng thả chuột
+        document.addEventListener('click', function () {
+            console.log('click');
+        })
+
+        document.addEventListener('mousedown', function () {
+            console.log('mousedown');
+        })
+
+        document.addEventListener('mousemove', function () {
+            console.log('mousemove');
+        })
+
+        document.addEventListener('mouseup', function () {
+            console.log('mouseup');
+        })
+
+
+    </script>
+</body>
+
+</html>
